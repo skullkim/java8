@@ -3,7 +3,7 @@ package me.skullkim.learnfunctionalinterface;
 import java.sql.SQLOutput;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 /**
  * Class Name: Foo
@@ -17,7 +17,9 @@ import java.util.function.Supplier;
 public class Foo {
 
     public static void main(String[] args) {
-        Supplier<Integer> get10 = () -> 10;
-        System.out.println(get10.get());
+        UnaryOperator<Integer> plus10 = (number) -> number + 10;
+        UnaryOperator<Integer> multiply2 = (number) -> number * 2;
+
+        System.out.println(plus10.andThen(multiply2).apply(2));
     }
 }
