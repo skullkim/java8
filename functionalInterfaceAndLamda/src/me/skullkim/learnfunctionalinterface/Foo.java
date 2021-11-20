@@ -14,10 +14,8 @@ import java.sql.SQLOutput;
 public class Foo {
 
     public static void main(String[] args) {
-        RunSomething runSomething = () -> {
-            System.out.println("hello");
-            System.out.println("lamda");
-        };
-        runSomething.doIt();
+        RunSomething runSomething = (number) -> number + 10;
+
+        System.out.println(runSomething.doIt(1));
     }
 }

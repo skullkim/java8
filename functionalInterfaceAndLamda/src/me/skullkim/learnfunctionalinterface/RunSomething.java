@@ -12,16 +12,5 @@ package me.skullkim.learnfunctionalinterface;
 @FunctionalInterface
 public interface RunSomething {
 
-    /**
-     * 이름을 출력하는 static method*/
-    static void printName() {
-        System.out.println("YunkiKim");
-    }
-
-    /**나이를 출력한다*/
-    default void printAge() {
-        System.out.println("23");
-    }
-
-    void doIt();
+   int doIt(int number);
 }
