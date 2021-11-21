@@ -37,7 +37,7 @@ public class Foo {
         };
 
         // Variable 'baseNumber' is already defined in the scope
-        IntConsumer printInt = (baseNumber) -> System.out.println(baseNumber);
+        IntConsumer printInt = (number) -> System.out.println(number);
 
         printInt.accept(10);
     }
