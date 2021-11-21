@@ -24,13 +24,6 @@ public class App {
         names.add("keesun");
         names.add("toby");
 
-        //오름차순 정렬
-        names.sort(String::compareToIgnoreCase);
-        names.forEach(System.out::println);
-
-        System.out.println("==========");
-
-        //내림차순 정렬
         Comparator<String> compareToIgnoreCase = String::compareToIgnoreCase;
         names.sort(compareToIgnoreCase.reversed());
 
