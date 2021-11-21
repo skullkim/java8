@@ -2,12 +2,13 @@ package me.skullkim.learninterface;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
 
 /**
  * <h1>인터페이스의 default method, static method 실습 엔트리 포인트</h1>
  *
  * @author yunkiKim
- * @version 2.0
+ * @version 3.0
  * @since 2021-11-20
  */
 
@@ -24,6 +25,11 @@ public class App {
         names.add("keesun");
         names.add("toby");
 
-        names.forEach(System.out::println);
+        Spliterator<String> spliterator = names.spliterator();
+        Spliterator<String> spliterator1 = spliterator.trySplit();
+        //tryAdvance역시 Consumer를 인자로 받는다.
+        while(spliterator.tryAdvance(System.out::println)); //keesun, toby
+        System.out.println("=======");
+        while(spliterator1.tryAdvance(System.out::println)); //yunki, skull
     }
 }
