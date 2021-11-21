@@ -1,9 +1,6 @@
 package me.skullkim.learninterface;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,8 +24,16 @@ public class App {
         names.add("keesun");
         names.add("toby");
 
-       names.removeIf(name -> name.startsWith("k"));
-       names.forEach(System.out::println);
+        //오름차순 정렬
+        names.sort(String::compareToIgnoreCase);
+        names.forEach(System.out::println);
 
+        System.out.println("==========");
+
+        //내림차순 정렬
+        Comparator<String> compareToIgnoreCase = String::compareToIgnoreCase;
+        names.sort(compareToIgnoreCase.reversed());
+
+        names.forEach(System.out::println);
     }
 }
