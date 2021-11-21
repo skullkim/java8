@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -23,8 +24,16 @@ public class App {
         names.add("toby");
         names.add("yunki");
 
-        Stream<String> stringStream = names.stream()
-                .map(String::toUpperCase);
-        stringStream.forEach(System.out::println);
+        List<String> collect = names.stream()
+            .map((name) -> {
+                System.out.println(name);
+                return name.toUpperCase();
+            })
+            .collect(Collectors.toList()); // terminal operator
+        collect.forEach(System.out::println);
+
+        System.out.println("==========");
+
+        names.forEach(System.out::println);
     }
 }
