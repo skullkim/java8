@@ -24,16 +24,13 @@ public class App {
         names.add("toby");
         names.add("yunki");
 
-        List<String> collect = names.stream()
-            .map((name) -> {
-                System.out.println(name);
-                return name.toUpperCase();
-            })
-            .collect(Collectors.toList()); // terminal operator
+        List<String> collect = names.parallelStream()
+                .map((name) -> {
+                    System.out.println(name + " " + Thread.currentThread().getName());
+
+                    return name.toUpperCase();
+                })
+                .collect(Collectors.toList());
         collect.forEach(System.out::println);
-
-        System.out.println("==========");
-
-        names.forEach(System.out::println);
     }
 }
