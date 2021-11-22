@@ -1,5 +1,8 @@
 package me.skullkim.concurrent;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * <h1>concurrent programming 실습을 위한 클래스</h1>
  *
@@ -15,21 +18,11 @@ public class App {
      *
      * @param args Unused
      */
-    public static void main(String[] args) throws InterruptedException {
-        Thread thread = new Thread(() -> {
+    public static void main(String[] args) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.submit(() -> {
             System.out.println("Thread: " + Thread.currentThread().getName());
-            try {
-                Thread.sleep(3000L);
-            } catch (InterruptedException err) {
-                throw new IllegalStateException(err);
-            }
         });
-        thread.start();
-
-        System.out.println("Hello: " + Thread.currentThread().getName());
-        //위에서 생성한 thread가 끝날때 까지 다른 thread는 동작을 멈춘다.
-        thread.join();
-        //thread가 끝나는 3초뒤 이 라인이 실행된다.
-        System.out.println(thread + " is finished");
+        executorService.shutdown();
     }
 }
