@@ -15,18 +15,21 @@ public class App {
      *
      * @param args Unused
      */
-    public static void main(String[] args) {
-        MyThread myThread = new MyThread();
-        myThread.start();
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            System.out.println("Thread: " + Thread.currentThread().getName());
+            try {
+                Thread.sleep(3000L);
+            } catch (InterruptedException err) {
+                throw new IllegalStateException(err);
+            }
+        });
+        thread.start();
 
-        System.out.println("Hello " + Thread.currentThread().getName());
-    }
-
-    static class MyThread extends Thread {
-        @Override
-        public void run() {
-            System.out.println("Thread" + Thread.currentThread().getName());
-
-        }
+        System.out.println("Hello: " + Thread.currentThread().getName());
+        //위에서 생성한 thread가 끝날때 까지 다른 thread는 동작을 멈춘다.
+        thread.join();
+        //thread가 끝나는 3초뒤 이 라인이 실행된다.
+        System.out.println(thread + " is finished");
     }
 }
