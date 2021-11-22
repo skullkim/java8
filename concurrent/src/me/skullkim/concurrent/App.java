@@ -1,5 +1,8 @@
 package me.skullkim.concurrent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -18,33 +21,41 @@ public class App {
      * @param args Unused
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        ExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
 
         Callable<String> hello = () -> {
             Thread.sleep(2000L);
             return "hello";
         };
 
-        //Callable의 반환값은 Future를 사용해 가져온다
-        Future<String> submit = executorService.submit(hello);
-        //isDone()은 현재 thread의 작업이 끝났으면 true, 아니면 false
-        System.out.println(submit.isDone());
-        System.out.println("Thread");
+       Callable<String> java = () -> {
+           Thread.sleep(3000L);
+           return "Java";
+       };
 
-        //cancel()을 통해 현재 thread를 interrupt하고 종료한다
-        //인자로 true를 주면 곧바로 종료시키고
-        //인자로 false를 주면 하던 작업을 마무리 하고 종료한다.
-        //하지만 어떤식으로 종료를 하던 강제로 종료한 것이기 때문에 반환값을 가져올 수 없다.
-        //cancel을 하면 isDone()은 true가 된다.
-        System.out.println(submit.cancel(true));
+       Callable<String> keesun = () -> {
+           Thread.sleep(1000L);
+           return "keesun";
+       };
 
-        //get()이전까지는 그냥 실행되고
-        //get() 부터는 thread가 작업을 끝나기를 기다린다
-        submit.get();
+       //incokeAll을 사용해 Future의 리스트를 만든다.
+       //invokeAll은 입력한 Callable이 모두 종료될때 까지 기다린다.
+       //따라서 결과값이 한번에 나온다.
+       List<Future<String>> futures =  executorService.invokeAll(
+               Arrays.asList(hello, java, keesun)
+       );
+       futures.forEach((future) -> {
+           try {
+               System.out.println(future.get());
+           } catch (InterruptedException | ExecutionException e) {
+               e.printStackTrace();
+           }
+       });
 
-        System.out.println(submit.isDone());
-
-        executorService.shutdown();
+       //invokeAny는 입력한 Callable를 수행하되 하나만 완료되면 해당 값만 반환하고 종료한다.
+       String s = executorService.invokeAny(Arrays.asList(hello, java, keesun));
+       System.out.println(s);
+       executorService.shutdown();
     }
 
 }
