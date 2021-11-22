@@ -1,8 +1,6 @@
 package me.skullkim.datetime;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 
 /**
  * <h1>java8에서 추가된 date, time관련 기능 실습</h1>
@@ -20,16 +18,13 @@ public class App {
      * @param args Unused
      */
     public static void main(String[] args) {
-        //machine time사용
-        Instant machineTime = Instant.now();
-        System.out.println(machineTime); // 기준시 UTC, GMT를 기준으로 시간이 나온다.
-        System.out.println(machineTime.atZone(ZoneId.of("UTC")));
+        //zone id를 사용해 특정 time zone의 현재 시간을 알아낸다.
+        ZonedDateTime nowInKorea = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+        System.out.println(nowInKorea);
 
-        //자신이 속한 시간대를 가져와서
-        ZoneId zone = ZoneId.systemDefault();
-        System.out.println(zone);
-        //GMT 기준 시간이 아닌 자신이 속한 시간대의 시간으로 구한다.
-        ZonedDateTime zonedDateTime = machineTime.atZone(zone);
+        //다음과 같은 방식을 사용하면 위와 같은 값을 구할 수 있다.
+        Instant nowInstant = Instant.now();
+        ZonedDateTime zonedDateTime = nowInstant.atZone(ZoneId.of("Asia/Seoul"));
         System.out.println(zonedDateTime);
 
     }
