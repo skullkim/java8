@@ -1,6 +1,7 @@
 package me.skullkim.datetime;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -19,20 +20,13 @@ public class App {
      * @param args Unused
      */
     public static void main(String[] args) {
-        LocalDate today = LocalDate.now();
-        LocalDate thisYearBirthDay = LocalDate.of(2021, Month.MARCH, 28);
+        LocalDateTime now = LocalDateTime.now();
 
-        //human time을 비교
-        Period period = Period.between(today, thisYearBirthDay);
-        System.out.println(period.getDays());
+        DateTimeFormatter MMddyyyy = DateTimeFormatter.ofPattern("MM/dd/yyy");
+        System.out.println(now.format(MMddyyyy));
 
-        Period util = today.until(thisYearBirthDay);
-        System.out.println(util.get(ChronoUnit.DAYS));
+        LocalDate parse = LocalDate.parse("07/15/1982", MMddyyyy);
+        System.out.println(parse);
 
-        //machine time을 비교
-        Instant now = Instant.now();
-        Instant plus = now.plus(10, ChronoUnit.SECONDS);
-        Duration between = Duration.between(now, plus);
-        System.out.println(between.getSeconds());
     }
 }
