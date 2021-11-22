@@ -1,6 +1,7 @@
 package me.skullkim.datetime;
 
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 
 /**
  * <h1>java8에서 추가된 date, time관련 기능 실습</h1>
@@ -18,14 +19,20 @@ public class App {
      * @param args Unused
      */
     public static void main(String[] args) {
-        //zone id를 사용해 특정 time zone의 현재 시간을 알아낸다.
-        ZonedDateTime nowInKorea = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
-        System.out.println(nowInKorea);
+        LocalDate today = LocalDate.now();
+        LocalDate thisYearBirthDay = LocalDate.of(2021, Month.MARCH, 28);
 
-        //다음과 같은 방식을 사용하면 위와 같은 값을 구할 수 있다.
-        Instant nowInstant = Instant.now();
-        ZonedDateTime zonedDateTime = nowInstant.atZone(ZoneId.of("Asia/Seoul"));
-        System.out.println(zonedDateTime);
+        //human time을 비교
+        Period period = Period.between(today, thisYearBirthDay);
+        System.out.println(period.getDays());
 
+        Period util = today.until(thisYearBirthDay);
+        System.out.println(util.get(ChronoUnit.DAYS));
+
+        //machine time을 비교
+        Instant now = Instant.now();
+        Instant plus = now.plus(10, ChronoUnit.SECONDS);
+        Duration between = Duration.between(now, plus);
+        System.out.println(between.getSeconds());
     }
 }
