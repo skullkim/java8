@@ -2,7 +2,9 @@ package me.skullkim.datetime;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 /**
  * <h1>java8에서 추가된 date, time관련 기능 실습</h1>
@@ -20,13 +22,39 @@ public class App {
      * @param args Unused
      */
     public static void main(String[] args) {
-        LocalDateTime now = LocalDateTime.now();
+        // Date -> Instant
+        Date date = new Date();
+        Instant instant = date.toInstant();
+        // Instant -> Date
+        Date newDate = Date.from(instant);
+        System.out.println(newDate);
 
-        DateTimeFormatter MMddyyyy = DateTimeFormatter.ofPattern("MM/dd/yyy");
-        System.out.println(now.format(MMddyyyy));
+        //GregorianCalendar -> ZonedDateTime
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        ZonedDateTime dateTime = gregorianCalendar.toInstant()
+                .atZone(ZoneId.systemDefault());
+        System.out.println(dateTime);
 
-        LocalDate parse = LocalDate.parse("07/15/1982", MMddyyyy);
-        System.out.println(parse);
+        //GregorianCalendar -> LocalDateTime
+        LocalDateTime localDateTime = gregorianCalendar.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        System.out.println(localDateTime);
+
+        // ZonedDateTime -> GregorianCalendar
+        ZonedDateTime zonedDateTime = gregorianCalendar.toInstant()
+                .atZone(ZoneId.systemDefault());
+        GregorianCalendar from = GregorianCalendar.from(zonedDateTime);
+        System.out.println(from);
+
+        // ZoneId -> TimeZone
+        ZoneId zoneId = TimeZone.getTimeZone("PST")
+                .toZoneId();
+        System.out.println(zoneId);
+
+        // TimeZone -> ZoneId
+        TimeZone timeZone = TimeZone.getTimeZone(zoneId);
+        System.out.println(timeZone);
 
     }
 }
