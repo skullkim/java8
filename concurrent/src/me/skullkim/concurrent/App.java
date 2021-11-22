@@ -1,7 +1,6 @@
 package me.skullkim.concurrent;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * <h1>concurrent programming 실습을 위한 클래스</h1>
@@ -19,10 +18,12 @@ public class App {
      * @param args Unused
      */
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(() -> {
-            System.out.println("Thread: " + Thread.currentThread().getName());
-        });
-        executorService.shutdown();
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        //처음에는 1초 delay를 하고 그 다음부터 2초 주기로 실행
+        executorService.scheduleAtFixedRate(getRunnable("hello"), 1, 2,  TimeUnit.SECONDS);
+    }
+
+    private static Runnable getRunnable(String message) {
+        return () -> System.out.println(message + Thread.currentThread().getName());
     }
 }
