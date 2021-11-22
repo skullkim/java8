@@ -22,14 +22,43 @@ public class App {
      */
     public static void main(String[] args) {
         List<OnlineClass> springClasses = new ArrayList<>();
-        springClasses.add(new OnlineClass(1, "spring boot", true));
-        springClasses.add(new OnlineClass(2, "sprint data jpa", true));
-        springClasses.add(new OnlineClass(3, "spring mvc", false));
-        springClasses.add(new OnlineClass(4, "spring core", false));
+        springClasses.add(new OnlineClass(1, "onlineClass boot", true));
         springClasses.add(new OnlineClass(5, "rest api development", true));
 
-        OnlineClass spring_boot = new OnlineClass(1, "spring boot", true);
-        Optional<Progress> progress = spring_boot.getProgress();
+        Optional<OnlineClass> onlineClass = springClasses.stream()
+                .filter((springClass) -> springClass.getTitle().startsWith("rest"))
+                .findFirst();
+        System.out.println(onlineClass.isPresent());
+        System.out.println(onlineClass.isEmpty());
+
+        //ifPresent,
+        onlineClass.ifPresent((oClass) -> System.out.println(oClass.getTitle()));
+
+        //orElse
+        System.out.println(onlineClass.orElse(createNewClass()).getTitle());
+
+        System.out.println("===========");
+        //orElseGet
+        System.out.println(onlineClass.orElseGet(App::createNewClass));
+
+        //orElseThrow
+        System.out.println(onlineClass.orElseThrow(IllegalAccessError::new).getTitle());
+
+        //filter
+        Optional<OnlineClass> oClass = onlineClass.filter(OnlineClass::isClosed);
+        System.out.println(oClass);
+
+        //map
+        Optional<Integer> integer =  onlineClass.map(OnlineClass::getClassId);
+        System.out.println(integer);
+
+        //flatMap
+        Optional<Progress> progress = onlineClass.flatMap(OnlineClass::getProgress);
         System.out.println(progress);
+    }
+
+    private static OnlineClass createNewClass() {
+        System.out.println("Create New Class");
+        return new OnlineClass(10, "new class", false);
     }
 }
