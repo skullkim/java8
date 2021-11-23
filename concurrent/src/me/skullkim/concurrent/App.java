@@ -32,16 +32,10 @@ public class App {
             return "World";
         });
 
-        List<CompletableFuture> futures = Arrays.asList(hello, world);
-        CompletableFuture[] futuresArray = futures.toArray(new CompletableFuture[futures.size()]);
+        CompletableFuture<Void> future = CompletableFuture.anyOf(hello, world)
+                .thenAccept(System.out::println);
+        future.get();
 
-        CompletableFuture<List<Object>> future = CompletableFuture.allOf(futuresArray)
-                .thenApply(result -> futures.stream()
-                        .map(CompletableFuture::join) // Future에서 반환하는 최종 결과값이 나온다.
-                        .collect(Collectors.toList())); // 결과값을 리스트로 만든다
-
-        future.get()
-                .forEach(System.out::println);
     }
 
 }
