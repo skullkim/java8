@@ -22,20 +22,21 @@ public class App {
      * @param args Unused
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        CompletableFuture<String> hello = CompletableFuture.supplyAsync(() -> {
-            System.out.println("Hello " + Thread.currentThread().getName());
-            return "Hello";
-        });
+       boolean throwError = true;
 
-        CompletableFuture<String> world = CompletableFuture.supplyAsync(() -> {
-            System.out.println("World " + Thread.currentThread().getName());
-            return "World";
-        });
+       CompletableFuture<String> hello = CompletableFuture.supplyAsync(() -> {
+           if(throwError) {
+               throw new IllegalArgumentException();
+           }
 
-        CompletableFuture<Void> future = CompletableFuture.anyOf(hello, world)
-                .thenAccept(System.out::println);
-        future.get();
+           System.out.println("Hello " + Thread.currentThread().getName());
+           return "hello";
+       }).exceptionally(ex -> {
+           System.out.println(ex);
+           return "Error";
+       });
 
+        System.out.println(hello.get());
     }
 
 }
