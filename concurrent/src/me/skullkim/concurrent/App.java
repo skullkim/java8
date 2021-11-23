@@ -22,7 +22,7 @@ public class App {
      * @param args Unused
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-       boolean throwError = true;
+       boolean throwError = false;
 
        CompletableFuture<String> hello = CompletableFuture.supplyAsync(() -> {
            if(throwError) {
@@ -31,9 +31,12 @@ public class App {
 
            System.out.println("Hello " + Thread.currentThread().getName());
            return "hello";
-       }).exceptionally(ex -> {
-           System.out.println(ex);
-           return "Error";
+       }).handle((result, ex) -> {
+           if(ex != null) {
+               System.out.println(ex);
+               return "Error";
+           }
+           return result;
        });
 
         System.out.println(hello.get());
