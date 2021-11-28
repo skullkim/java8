@@ -5,6 +5,26 @@ public class Study {
 
 	private int limit;
 
+	private String name;
+
+	@Override
+	public String toString() {
+		return "Study{" +
+			"status=" + status +
+			", limit=" + limit +
+			", name='" + name + '\'' +
+			'}';
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Study(int limit, String name) {
+		this.limit = limit;
+		this.name = name;
+	}
+
 	public int getLimit() {
 		return limit;
 	}
