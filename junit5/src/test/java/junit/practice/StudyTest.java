@@ -17,17 +17,15 @@ import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
-	@Test
+	@FastTest
 	@DisplayName("새로운 스터디 만들기")
-	@Tag("fast")
 	public void createNewStudy() {
 		Study actual = new Study(100);
 		assertTrue(actual.getLimit() > 0);
 	}
 
-	@Test
+	@SlowTest
 	@DisplayName("스터디 만들기 slow")
-	@Tag("slow")
 	void create1() {
 		System.out.println("create1");
 	}
