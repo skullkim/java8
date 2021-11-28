@@ -15,5 +15,8 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform{
+        includeTags 'fast'
+        excludeTags 'slow'
+    }
 }

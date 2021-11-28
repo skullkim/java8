@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="junit.practice.StudyTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-28T08:42:54" hostname="gim-yungiui-MacBookPro.local" time="0.01">
+<testsuite name="junit.practice.StudyTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-28T10:23:55" hostname="gim-yungiui-MacBookPro.local" time="0.015">
   <properties/>
-  <testcase name="createNewStudy()" classname="junit.practice.StudyTest" time="0.008"/>
-  <testcase name="create1()" classname="junit.practice.StudyTest" time="0.001"/>
+  <testcase name="createNewStudy()" classname="junit.practice.StudyTest" time="0.015"/>
   <system-out><![CDATA[before all
 before each
-create
-after Each
-before each
-create1
 after Each
 after all
 ]]></system-out>

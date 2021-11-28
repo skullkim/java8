@@ -12,27 +12,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
-import org.junit.jupiter.api.condition.EnabledOnJre;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.JRE;
-import org.junit.jupiter.api.condition.OS;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
 	@Test
 	@DisplayName("새로운 스터디 만들기")
-	@EnabledOnOs(OS.MAC)
-	@EnabledOnJre(JRE.JAVA_8)
-	@EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "LOCAL")
+	@Tag("fast")
 	public void createNewStudy() {
 		Study actual = new Study(100);
 		assertTrue(actual.getLimit() > 0);
 	}
 
 	@Test
+	@DisplayName("스터디 만들기 slow")
+	@Tag("slow")
 	void create1() {
 		System.out.println("create1");
 	}

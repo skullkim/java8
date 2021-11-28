@@ -1,4 +1,0 @@
-junit/practice/StudyStatus.java
- junit.practice.StudyStatus
-junit/practice/Study.java
- junit.practice.Study
