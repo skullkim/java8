@@ -1,0 +1,2 @@
+junit/practice/StudyTest.java
+ junit.practice.StudyTest
