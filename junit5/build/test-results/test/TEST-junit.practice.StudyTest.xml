@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="junit.practice.StudyTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-28T07:42:17" hostname="gim-yungiui-MacBookPro.local" time="0.011">
+<testsuite name="junit.practice.StudyTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-28T08:42:54" hostname="gim-yungiui-MacBookPro.local" time="0.01">
   <properties/>
-  <testcase name="create()" classname="junit.practice.StudyTest" time="0.009"/>
+  <testcase name="createNewStudy()" classname="junit.practice.StudyTest" time="0.008"/>
   <testcase name="create1()" classname="junit.practice.StudyTest" time="0.001"/>
   <system-out><![CDATA[before all
 before each

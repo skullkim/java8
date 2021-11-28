@@ -4,14 +4,18 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import junit.framework.TestCase;
 
-public class StudyTest extends TestCase {
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+class StudyTest extends TestCase {
 	@Test
-	public void create() {
+	@DisplayName("새로운 스터디 만들기")
+	public void createNewStudy() {
 		Study study = new Study();
 		assertNotNull(study);
 		System.out.println("create");
@@ -20,12 +24,6 @@ public class StudyTest extends TestCase {
 	@Test
 	void create1() {
 		System.out.println("create1");
-	}
-
-	@Test
-	@Disabled
-	void disabled() {
-		System.out.println("disable");
 	}
 
 	@BeforeAll
