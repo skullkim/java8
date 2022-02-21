@@ -10,5 +10,15 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.mockito/mockito-all
+    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+
+}
+
+test {
+    useJUnitPlatform()
 }
